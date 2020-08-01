@@ -32,23 +32,11 @@ public class MainActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.email_edit_text);
         passwordEditText = findViewById(R.id.password_edit_text);
         goButton = findViewById(R.id.go_button);
-        goButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        goButton.setOnClickListener(v-> {
                 RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
                 String url = "https://finalproject.xyz/covid_19/api.php";
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
-                    }
-                },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-                            }
-                        }){
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show(),
+                        error -> Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show()){
                     @Override
                     public Map<String, String> getHeaders() throws AuthFailureError {
                         return super.getHeaders();
@@ -64,13 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 };
                 requestQueue.add(stringRequest);
-            }
         });
-        signUpIntentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,SignUpUi.class));
-            }
-        });
+        signUpIntentButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,SignUpUi.class)));
     }
 }
