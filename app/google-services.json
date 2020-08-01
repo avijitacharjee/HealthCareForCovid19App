@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "462321639151",
+    "firebase_url": "https://healthcareforcovid19.firebaseio.com",
+    "project_id": "healthcareforcovid19",
+    "storage_bucket": "healthcareforcovid19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462321639151:android:51811e77d29d283ceb451a",
+        "android_client_info": {
+          "package_name": "com.avijit.healthcareforcovid19"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462321639151-kp21qpcs8gvce7r0bodipr6dq0lbie8u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkr7iKVTlDMgUmFtt3XPj6F5qTyN_J79U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462321639151-kp21qpcs8gvce7r0bodipr6dq0lbie8u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
