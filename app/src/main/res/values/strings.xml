@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Health Care For Covid 19</string>
+    <string name="q1">Have you been within 6 feet of a person with a lab-confirmed case of COVID-19 for at least 5 minutes, or had direct contact with their mucus or saliva, in the past 14 days?</string>
 </resources>

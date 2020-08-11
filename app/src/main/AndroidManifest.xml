@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents">
-        <activity android:name=".Index"></activity>
+        <activity android:name=".CovidTest"></activity>
+        <activity android:name=".Index" />
         <activity android:name=".SignUpUi" />
         <activity android:name=".MainActivity">
             <intent-filter>
