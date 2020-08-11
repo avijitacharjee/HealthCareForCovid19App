@@ -1,5 +1,6 @@
 package com.avijit.healthcareforcovid19.questionfragments;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,6 @@ public class Q1Fragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        ObjectAnimator.ofFloat(view,View.ALPHA,0f,1f).start();
     }
 }

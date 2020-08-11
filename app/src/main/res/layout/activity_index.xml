@@ -11,11 +11,33 @@
         android:text="Test For Covid"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="5dp"
+        android:textSize="25sp"
+        android:outlineProvider="bounds"
         android:padding="30dp"
         android:gravity="center"
         android:textColor="@color/black_1"
         android:background="@color/white_1"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/profile"
+        android:text="Profile"
+        android:textSize="25sp"
+        app:layout_constraintTop_toBottomOf="@id/covid_test_intent"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="5dp"
+        android:outlineProvider="bounds"
+        android:padding="30dp"
+        android:gravity="center"
+        android:textColor="@color/black_1"
+        android:background="@color/white_1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
 
