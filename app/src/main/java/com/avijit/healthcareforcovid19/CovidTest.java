@@ -21,17 +21,24 @@ public class CovidTest extends AppCompatActivity {
                 .commit();
         previousButton = findViewById(R.id.prev_button);
         nextButton = findViewById(R.id.next_button);
+
         nextButton.setOnClickListener(v -> {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container,new Q2Fragment())
-                    .commit();
+            if(currentFragment<4){
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container,new Q2Fragment())
+                        .commit();
+                currentFragment+=1;
+            }
         });
         previousButton.setOnClickListener(v -> {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container,new Q1Fragment())
-                    .commit();
+            if(currentFragment>0){
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container,new Q1Fragment())
+                        .commit();
+                currentFragment-=1;
+            }
         });
 
     }
