@@ -14,6 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:elevation="5dp"
+        app:layout_constraintVertical_bias=".3"
         android:textSize="25sp"
         android:outlineProvider="bounds"
         android:padding="30dp"
