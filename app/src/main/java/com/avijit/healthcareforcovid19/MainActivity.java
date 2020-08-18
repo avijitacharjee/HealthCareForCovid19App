@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
                 String url = "https://finalproject.xyz/covid_19/api.php";
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response ->{
                     Log.d(TAG, "onCreate: "+response);
-                    if(response.equals("success")){
+                    if(response.contains("success")){
+                        getSharedPreferences("app",MODE_PRIVATE).edit().putString("user",response).apply();
                         startActivity(new Intent(getApplicationContext(),Index.class));
                     }
                     else {

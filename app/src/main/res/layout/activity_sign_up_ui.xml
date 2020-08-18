@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_1"
+    android:background="@color/white_1"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".SignUpUi">
@@ -14,6 +14,7 @@
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:elevation="10dp"
+        android:background="@color/white_1"
         android:outlineProvider="paddedBounds"
         android:orientation="vertical">
 
