@@ -6,8 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,20 +27,98 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.avijit.healthcareforcovid19.adapter.FamilyMemberRecyclerViewAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FamilyInfo extends AppCompatActivity {
+    private static final String TAG = "FamilyInfo";
     FloatingActionButton fab;
+    private ProgressDialog progressDialog;
+    String id;
+    List<String> names = new ArrayList<>();
+    List<String> ages = new ArrayList<>();
+    List<String> relations = new ArrayList<>();
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family_info);
         fab = findViewById(R.id.add_member_button);
+        recyclerView = findViewById(R.id.recycler_view);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(llm);
+        FamilyMemberRecyclerViewAdapter adapter = new FamilyMemberRecyclerViewAdapter(names,ages,relations);
+        recyclerView.setAdapter(adapter);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Loading");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setProgress(0);
+        progressDialog.show();
+        try {
+            JSONObject jsonObject = new JSONObject(getApplication().getSharedPreferences("app",MODE_PRIVATE).getString("user",""));
+            JSONObject data = jsonObject.getJSONObject("data");
+            id = data.getString("id");
+        }catch (Exception e){
+
+        }
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        String url = "https://finalproject.xyz/covid_19/api.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+                names.clear();
+                ages.clear();
+                relations.clear();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray data = jsonObject.getJSONArray("data");
+                    for (int i=0;i<data.length();i++){
+                        names.add(data.getJSONObject(i).getString("name"));
+                        ages.add(data.getJSONObject(i).getString("age"));
+                        relations.add(data.getJSONObject(i).getString("relation"));
+                    }
+                    Log.d(TAG, "onResponse: "+names.toString());
+                    FamilyMemberRecyclerViewAdapter adapter = new FamilyMemberRecyclerViewAdapter(names,ages,relations);
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }catch (Exception e){
+                    Log.d(TAG, "onResponse: "+e);
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return super.getHeaders();
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("get_family_members", "1");
+                params.put("member_of_user_id",id );
+
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
         fab.setOnClickListener(v->{
             DialogFragment dialogFragment=  new AddFamilyMemberDialogFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -46,6 +129,7 @@ public class FamilyInfo extends AppCompatActivity {
             ft.addToBackStack(null);
             dialogFragment.show(ft,"update");
         });
+
     }
 
     public static class AddFamilyMemberDialogFragment extends DialogFragment {
@@ -79,6 +163,7 @@ public class FamilyInfo extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
+                        startActivity( new Intent(getContext(),FamilyInfo.class));
                     }
                 },
                         new Response.ErrorListener() {
