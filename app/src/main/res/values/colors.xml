@@ -6,4 +6,6 @@
     <color name="white_1">#fcf3f2</color>
     <color name="black_1">#393332</color>
     <color name="black">#000</color>
+    <color name="cardColor">#5C6BC0</color>
+    <color name="white">#FFFFFF</color>
 </resources>

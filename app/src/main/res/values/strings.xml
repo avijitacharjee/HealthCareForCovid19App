@@ -4,4 +4,7 @@
     <string name="q2">In the last 48 hours, have you had any of the following NEW symptoms?</string>
     <string name="q3">Do you have any of the following possible emergency symptoms?</string>
     <string name="q4">Is the person age is below 5?</string>
+    <string name="total_cases">Total cases:</string>
+    <string name="next">Next</string>
+    <string name="home">Home</string>
 </resources>

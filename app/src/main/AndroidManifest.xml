@@ -11,12 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents">
-        <activity android:name=".FamilyInfo"></activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".CovidInfoActivity"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar"/>
+        <activity android:name=".FamilyInfo" />
         <activity android:name=".Profile" />
         <activity android:name=".CovidTest" />
         <activity android:name=".Index" />
         <activity android:name=".SignUpUi" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
