@@ -8,4 +8,7 @@
     <string name="next">Next</string>
     <string name="home">Home</string>
     <string name="submit">Submit</string>
+    <string name="r_header">Based on what you described, here is what we would recommend:</string>
+    <string name="r_header2">Call 911 or your local emergency number!</string>
+    <string name="r_text">This may be a medical emergency. Your breathing trouble may be caused by a life-threatening lung or heart problem. You may need emergency treatment on the way to the hospital.</string>
 </resources>
