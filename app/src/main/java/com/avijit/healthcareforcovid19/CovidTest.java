@@ -2,6 +2,7 @@ package com.avijit.healthcareforcovid19;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -50,7 +51,10 @@ public class CovidTest extends AppCompatActivity {
                             .replace(R.id.fragment_container,new Q4Fragment())
                             .commit();
                     currentFragment+=1;
-                    nextButton.setVisibility(View.GONE);
+                    nextButton.setText(R.string.submit);
+                    nextButton.setBackgroundColor(Color.parseColor("#4CAF50"));
+                    nextButton.setTextColor(Color.parseColor("#FFFFFF"));
+                    //nextButton.setVisibility(View.GONE);
                     break;
                 }
                 case 4: {
