@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.avijit.healthcareforcovid19"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -48,6 +48,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     implementation 'com.google.code.gson:gson:2.8.5'
-
 
 }

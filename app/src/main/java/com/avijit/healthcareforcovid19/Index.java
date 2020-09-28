@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class Index extends AppCompatActivity {
-    TextView covidTestIntent,profileIntent,familyIntent;
+    TextView covidTestIntent,profileIntent,familyIntent,hospitalIntent, plasmaDonorsIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,6 +15,8 @@ public class Index extends AppCompatActivity {
         covidTestIntent = findViewById(R.id.covid_test_intent);
         profileIntent = findViewById(R.id.profile);
         familyIntent = findViewById(R.id.family_info);
+        hospitalIntent = findViewById(R.id.covid_hospitals_button);
+        plasmaDonorsIntent = findViewById(R.id.plasma_donor_button);
         covidTestIntent.setOnClickListener(v->{
             startActivity(CovidTest.class);
         });
@@ -23,6 +25,9 @@ public class Index extends AppCompatActivity {
         });
         familyIntent.setOnClickListener(v->{
             startActivity(FamilyInfo.class);
+        });
+        plasmaDonorsIntent.setOnClickListener(v->{
+            startActivity(PlasmaDonorsActivity.class);
         });
     }
 
