@@ -46,7 +46,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(new LatLng(26.029522,	88.476562)).title("Adhunik Sadar Hospital, Thakurgaon, Bangladesh"));
         mMap.addMarker(new MarkerOptions().position(new LatLng(23.638319	,90.933197)).title("Micro Path & Hospital Limited, Muradnagar, Bangladesh"));
         mMap.addMarker(new MarkerOptions().position(new LatLng(26.029522,	88.476562)).title("Adhunik Sadar Hospital, Thakurgaon, Bangladesh"));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(26.029522,	88.476562)).title("Adhunik Sadar Hospital, Thakurgaon, Bangladesh"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
