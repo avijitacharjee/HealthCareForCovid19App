@@ -29,6 +29,9 @@ public class Index extends AppCompatActivity {
         plasmaDonorsIntent.setOnClickListener(v->{
             startActivity(PlasmaDonorsActivity.class);
         });
+        hospitalIntent.setOnClickListener(v->{
+            startActivity(MapsActivity.class);
+        });
     }
 
     public void startActivity(Class cls) {
