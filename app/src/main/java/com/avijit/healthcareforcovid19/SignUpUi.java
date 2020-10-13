@@ -2,6 +2,7 @@ package com.avijit.healthcareforcovid19;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ import java.util.Map;
 public class SignUpUi extends AppCompatActivity {
     EditText nameEditText,emailEditText,phoneEditText,passwordEditText,confirmPasswordEditText;
     TextView goButton;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,20 +34,29 @@ public class SignUpUi extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password_edit_text);
         confirmPasswordEditText = findViewById(R.id.confirm_password_edit_text);
         goButton = findViewById(R.id.go);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Loading");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setProgress(0);
+
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.show();
                 RequestQueue requestQueue = Volley.newRequestQueue(SignUpUi.this);
                 String url = "https://finalproject.xyz/covid_19/api.php";
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        progressDialog.dismiss();
                         Toast.makeText(SignUpUi.this, response, Toast.LENGTH_SHORT).show();
                     }
                 },
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+                                progressDialog.dismiss();
                                 Toast.makeText(SignUpUi.this, "error", Toast.LENGTH_SHORT).show();
                             }
                         }){

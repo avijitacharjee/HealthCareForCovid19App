@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 public class Index extends AppCompatActivity {
     TextView covidTestIntent,profileIntent,familyIntent,hospitalIntent, plasmaDonorsIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

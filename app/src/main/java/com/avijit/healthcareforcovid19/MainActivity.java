@@ -2,6 +2,7 @@ package com.avijit.healthcareforcovid19;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     TextView signUpIntentButton;
     TextView goButton;
-    EditText emailEditText,passwordEditText;
+    EditText emailEditText, passwordEditText;
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,36 +37,44 @@ public class MainActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.email_edit_text);
         passwordEditText = findViewById(R.id.password_edit_text);
         goButton = findViewById(R.id.go_btn);
-        goButton.setOnClickListener(v-> {
-                RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-                String url = "https://finalproject.xyz/covid_19/api.php";
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response ->{
-                    Log.d(TAG, "onCreate: "+response);
-                    if(response.contains("success")){
-                        getSharedPreferences("app",MODE_PRIVATE).edit().putString("user",response).apply();
-                        startActivity(new Intent(getApplicationContext(),Index.class));
-                    }
-                    else {
-                        Toast.makeText(this, "Incorrect email/password", Toast.LENGTH_SHORT).show();
-                    }
-                },
-                        error -> Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show()){
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        return super.getHeaders();
-                    }
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Loading");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setProgress(0);
+        goButton.setOnClickListener(v -> {
+            RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+            String url = "https://finalproject.xyz/covid_19/api.php";
+            progressDialog.show();
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+                progressDialog.dismiss();
+                Log.d(TAG, "onCreate: " + response);
+                if (response.contains("success")) {
+                    getSharedPreferences("app", MODE_PRIVATE).edit().putString("user", response).apply();
+                    startActivity(new Intent(getApplicationContext(), Index.class));
+                } else {
+                    Toast.makeText(this, "Incorrect email/password", Toast.LENGTH_SHORT).show();
+                }
+            },
+                    error -> {
+                        Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    return super.getHeaders();
+                }
 
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String,String> params = new HashMap<>();
-                        params.put("login","1");
-                        params.put("email",emailEditText.getText().toString());
-                        params.put("password",passwordEditText.getText().toString());
-                        return params;
-                    }
-                };
-                requestQueue.add(stringRequest);
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("login", "1");
+                    params.put("email", emailEditText.getText().toString());
+                    params.put("password", passwordEditText.getText().toString());
+                    return params;
+                }
+            };
+            requestQueue.add(stringRequest);
         });
-        signUpIntentButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,SignUpUi.class)));
+        signUpIntentButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SignUpUi.class)));
     }
 }
